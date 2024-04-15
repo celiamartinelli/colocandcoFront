@@ -1,0 +1,48 @@
+@use '@scssVariables' as v;
+
+.containerSign {
+  //background-color: lightcoral;
+  height: 85vh;
+  width: 70%;
+  margin: auto;
+  text-align: center;
+  border: 1px lightgray solid;
+  border-radius: 4px;
+  box-shadow: 2px 3px 6px lightgray;
+  padding: 2em 0 2em 0;
+  &__main {
+    //background-color: lightgreen;
+    height: 50vh;
+    width: 50%;
+    margin: auto;
+    padding: 3em 0 1em 0;
+    &__header {
+      padding: 1em 0 1em 0;
+    }
+    &__title {
+      padding: 1em 0 1em 0;
+    }
+    &__main {
+      //background-color: lightsalmon;
+      display: flex;
+      flex-direction: column;
+
+      &__button {
+        background-color: v.$color-btn;
+        margin-top: 1em;
+        padding: 0.5em;
+        border-radius: 4px;
+        color: v.$light-color;
+      }
+      &__button:hover {
+        background-color: v.$color-btn-hover;
+      }
+    }
+  }
+  &__footer {
+    margin-top: 2em;
+  }
+  &__footer:hover {
+    color: v.$color-btn;
+  }
+}

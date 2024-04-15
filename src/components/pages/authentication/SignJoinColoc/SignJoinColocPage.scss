@@ -1,0 +1,75 @@
+@use '@scssVariables' as v;
+
+.containerSign {
+  &__title {
+    margin: 1em;
+  }
+  &__form {
+    margin-top: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    &__label {
+      position: relative;
+      margin-bottom: 0.5em;
+      width: 16em;
+      text-align: left;
+      font-size: 0.8em;
+      color: v.$light-grey;
+    }
+    &__input {
+      width: 100%;
+      padding: 0.3em;
+      border: 1px solid lightgray;
+      border-radius: 4px;
+      transition: border-color 0.3s;
+      //cursor: pointer;
+      &__toggle {
+        &__eye {
+          position: absolute;
+          top: 100%;
+          right: 15px;
+          transform: translateY(-130%);
+          cursor: pointer;
+          color: grey;
+        }
+      }
+    }
+
+    &__input:hover,
+    &__input:focus {
+      border-color: v.$color-btn;
+    }
+
+    &__checkbox {
+      font-size: small;
+    }
+
+    &__button {
+      background-color: v.$color-btn;
+      width: 16em;
+      padding: 0.5em;
+      border-radius: 4px;
+      color: v.$light-color;
+      margin: 1em auto;
+    }
+    &__button:hover {
+      background-color: v.$color-btn-hover;
+    }
+
+    &__error {
+      font-size: x-small;
+      color: v.$error-color;
+    }
+  }
+  &__link {
+    font-size: small;
+    color: v.$color-btn;
+    cursor: pointer;
+  }
+  &__link:hover {
+    color: v.$color-btn-hover;
+  }
+}

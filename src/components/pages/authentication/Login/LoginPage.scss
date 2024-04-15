@@ -1,0 +1,47 @@
+@use '@scssVariables' as v;
+
+.popUp {
+  &__resetPassword {
+    &__button {
+      background-color: v.$color-btn;
+      //margin-top: 1em;
+      padding: 0.5em;
+      border-radius: 4px;
+      color: v.$light-color;
+    }
+    &__button:hover {
+      background-color: v.$color-btn-hover;
+    }
+    &__underTitle {
+      font-size: small;
+    }
+  }
+  &__form {
+    margin-top: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__label {
+      position: relative;
+      margin-bottom: 0.5em;
+      width: 16em;
+      text-align: left;
+      font-size: 0.8em;
+      color: v.$light-grey;
+    }
+    &__input {
+      width: 100%;
+      padding: 0.3em;
+      border: 1px solid lightgray;
+      border-radius: 4px;
+      transition: border-color 0.3s;
+      //cursor: pointer;
+    }
+
+    &__input:hover,
+    &__input:focus {
+      border-color: v.$color-btn;
+    }
+  }
+}

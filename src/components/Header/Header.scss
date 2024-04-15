@@ -1,0 +1,26 @@
+@use '@scssVariables' as v;
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  &__home {
+    padding-right: 0.5em;
+  }
+}
+
+.button {
+  &__logout {
+    padding-left: 0.5em;
+  }
+}
+
+.logout-container {
+  position: relative;
+}
+/*
+.button__logout {
+  cursor: pointer;
+}
+*/

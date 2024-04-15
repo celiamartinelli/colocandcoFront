@@ -1,0 +1,19 @@
+@use '@scssVariables' as v;
+
+.container {
+  &__content {
+    &__title {
+      &__button {
+        font-size: small;
+        background-color: v.$color-btn;
+        margin-top: 1em;
+        padding: 0.5em;
+        border-radius: 4px;
+        color: v.$light-color;
+      }
+      &__button:hover {
+        background-color: v.$color-btn-hover;
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+@use '@scssVariables' as v;
+
+.headerSign {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em 1em 1em 0;
+}

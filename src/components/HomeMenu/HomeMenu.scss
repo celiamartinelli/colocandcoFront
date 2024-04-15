@@ -1,0 +1,60 @@
+@use '@scssVariables' as v;
+
+.homeMenu {
+  border-right: 1px solid lightgray;
+  width: 13em;
+  height: 100vh;
+  position: relative;
+  z-index: 10;
+  transition: transform 0.4s ease;
+
+  &--close {
+    transform: translateX(-11em);
+    border: inherit;
+  }
+
+  &__menuBurger {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5em 0.5em 0.5em 1em;
+  }
+
+  &__profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__avatar {
+      color: lightgray;
+      font-size: 4em;
+    }
+  }
+
+  &__profileUser {
+    color: lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__single {
+      padding-top: 0.5em;
+      font-size: 2em;
+    }
+    &__single:hover {
+      color: grey;
+    }
+  }
+  &__footer {
+    border-top: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5em 1em 0 1em;
+    padding-top: 0.5em;
+    transition: transform 0.4s ease;
+
+    &--close {
+      transform: translateX(-11em);
+      border: inherit;
+    }
+  }
+}
