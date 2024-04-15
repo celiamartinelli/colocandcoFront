@@ -1,1 +1,17 @@
 @use '@scssVariables' as v;
+
+.backgroungAuth {
+  height: 100vh;
+  background: -webkit-linear-gradient(
+    306deg,
+    #0a226b,
+    #0a67ae,
+    #f0f0f0
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    306deg,
+    #0a226b,
+    #0a67ae,
+    #f0f0f0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

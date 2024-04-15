@@ -1,18 +1,247 @@
 @use '@scssVariables' as v;
 
 .container {
-  &__content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  // &__header {
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: flex-end;
+  //   position: absolute;
+  //   right: 0;
+  //   bottom: 1;
+  //   margin: 1em;
+  //   // z-index: 0;
+  // }
+  &__P {
+    // background-color: lightcoral;
+    display: flex;
+    flex-direction: column;
+    width: 60em;
+    &__header {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      position: absolute;
+      right: 0;
+      bottom: 1;
+      margin: 1em;
+      // z-index: 0;
+    }
+
     &__title {
+      font-size: 2em;
+      text-align: center;
+      margin-top: 1em;
+      &__edit {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        &__button {
+          font-size: small;
+          background-color: v.$color-btn;
+          border-radius: 6px;
+          // margin-top: 1em;
+          padding: 0.5em;
+          color: v.$light-color;
+          border-bottom: 3px solid v.$color-text-auth;
+          // text-shadow: 0px -2px #2980b9;
+          // -webkit-transition: all 0.1s;
+          transition: all 0.1s;
+
+          &__icone {
+            padding-left: 0.8em;
+          }
+        }
+        &__button:hover {
+          background-color: v.$color-btn-hover;
+          color: v.$color-text-auth-hover;
+        }
+        &__button:active {
+          -webkit-transform: translate(0px, 5px);
+          transform: translate(0px, 5px);
+          border-bottom: 1px solid;
+        }
+        &__buttonSave {
+          font-size: small;
+          background-color: v.$color-valid;
+          border-radius: 6px;
+          margin-left: 5em;
+          padding: 0.5em;
+          color: v.$light-color;
+          border-bottom: 3px solid v.$color-valid-hover;
+          // text-shadow: 0px -2px #2980b9;
+          // -webkit-transition: all 0.1s;
+          transition: all 0.1s;
+
+          &__icone {
+            padding-left: 0.8em;
+          }
+        }
+        &__buttonSave:hover {
+          background-color: v.$color-valid-hover;
+          color: v.$color-text-auth-hover;
+        }
+        &__buttonSave:active {
+          -webkit-transform: translate(0px, 5px);
+          transform: translate(0px, 5px);
+          border-bottom: 1px solid;
+        }
+      }
+      &__file {
+        // background-color: lightcyan;
+        border-radius: 50%;
+        width: 4.5em;
+        height: 4.5em;
+        object-fit: cover;
+        // border: 3px solid white;
+        box-shadow: 2px 2px 3px rgba(50, 48, 59, 0.5);
+        margin: auto;
+      }
+      &__avatar {
+        color: v.$color-avatar-hover;
+        font-size: 4em;
+
+        &__file {
+          border-radius: 50%;
+        }
+      }
+      &__name {
+        color: v.$color-avatar-hover;
+        font-weight: 500;
+      }
       &__button {
         font-size: small;
         background-color: v.$color-btn;
+        border-radius: 6px;
+        // margin-top: 1em;
+        padding: 0.5em;
+        color: v.$light-color;
+        border-bottom: 3px solid v.$color-text-auth;
+        // text-shadow: 0px -2px #2980b9;
+        // -webkit-transition: all 0.1s;
+        transition: all 0.1s;
+        &__icone {
+          padding-left: 0.8em;
+        }
+      }
+      &__button:hover {
+        background-color: v.$color-btn-hover;
+        color: v.$color-text-auth-hover;
+      }
+      &__button:active {
+        -webkit-transform: translate(0px, 5px);
+        transform: translate(0px, 5px);
+        border-bottom: 1px solid;
+      }
+    }
+    &__main {
+      // background-color: lightpink;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      // margin: 0.5em;
+      &__section {
+        width: 40%;
+        height: 100%;
+        border: 1px lightgray solid;
+        border-radius: 6px;
+        box-shadow: 1px 3px 2px lightgray;
+        padding: 1em;
+        margin: 0.5em;
+        &__article {
+          // background-color: lightgreen;
+          padding-left: 1em;
+          &__infos {
+            font-size: 1.5em;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 1em;
+          }
+          &__input {
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+            padding-left: 0.5em;
+            font-weight: 500;
+            box-shadow: inset 1px 1px 0.2em v.$light-grey;
+          }
+          &__paraph {
+            padding: 2px;
+            padding-left: 0.5em;
+            font-weight: 500;
+          }
+          &__description {
+            padding: 2px;
+            padding-left: 0.5em;
+            width: 12.2em;
+            height: 5em;
+          }
+          &__header {
+            display: flex;
+            align-items: center;
+            &__icone {
+              color: v.$color-text-auth;
+            }
+
+            &__title {
+              margin: 0.3em;
+              font-size: 1em;
+              font-weight: 500;
+              color: gray;
+            }
+            &__main {
+              display: flex;
+              align-items: baseline;
+              &__toggle {
+                padding-left: 1em;
+                // background-color: lightseagreen;
+              }
+            }
+          }
+          // &__button {
+          //   font-size: small;
+          //   background-color: v.$color-btn;
+          //   margin-top: 1em;
+          //   padding: 0.5em;
+          //   border-radius: 4px;
+          //   color: v.$light-color;
+          // }
+          // &__button:hover {
+          //   background-color: v.$color-btn-hover;
+          // }
+
+          &__footer {
+            text-align: center;
+            z-index: 10;
+          }
+        }
+      }
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      padding: 0 0.7em 0.5em 0;
+      z-index: 0;
+    }
+    &__delete {
+      &__button {
+        font-size: small;
+        background-color: v.$color-btn-delete;
         margin-top: 1em;
         padding: 0.5em;
         border-radius: 4px;
         color: v.$light-color;
       }
       &__button:hover {
-        background-color: v.$color-btn-hover;
+        background-color: v.$color-btn-delete-hover;
       }
     }
   }

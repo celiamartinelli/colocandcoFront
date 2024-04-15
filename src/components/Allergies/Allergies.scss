@@ -1,0 +1,31 @@
+@use '@scssVariables' as v;
+
+.listContainer {
+  &__form {
+    &__NewAllergy {
+      border: 1px solid lightgray;
+      border-radius: 5px;
+    }
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    &__allergies {
+      display: flex;
+      justify-content: space-between;
+      margin: 4px;
+      border-radius: 20px;
+      color: white;
+      padding: 0.3em 0.5em;
+      &__delete {
+        cursor: pointer;
+        color: white;
+        margin-left: 0.5rem;
+        &:hover {
+          color: v.$color-avatar-hover;
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,11 @@
+@use 'media-queries' as mq;
 @use 'reset';
 @use 'variables' as v;
 
+@import url(https://fonts.bunny.net/css?family=anuphan:100,200,300,400,500,600,700);
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Anuphan', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -12,19 +15,21 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-// POP-UP CONFIRM
+
 .logout {
   &__confirmation {
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #fff;
-    border: 1px solid #ccc;
+    // left: 50%;
+    transform: translateX(-80%);
+    // background-color: #fff;
+    background-color: rgba(15, 61, 117);
+    // border: 1px solid #ccc;
     padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 3px v.$box-shadow;
     z-index: 999;
     text-align: center;
+    color: v.$color-text-auth-hover;
   }
 
   &__confirmation p {
@@ -33,12 +38,25 @@
   }
 
   &__confirmation button {
-    margin: 5px;
-    padding: 5px 10px;
-    //cursor: pointer;
+    margin: 0.1em;
+    padding: 0.1em 0.4em;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(15, 61, 117);
+    // text-shadow: 0px -2px #2980b9;
+    // -webkit-transition: all 0.1s;
+    transition: all 0.1s;
   }
 
   &__confirmation button:hover {
     background-color: #eee;
+    color: v.$color-text-auth;
+    border-bottom: 1px solid v.$color-text-auth;
+    border-radius: 4px;
+  }
+
+  &__confirmation button:active {
+    -webkit-transform: translate(0px, 5px);
+    transform: translate(0px, 5px);
+    border-bottom: 1px solid;
   }
 }

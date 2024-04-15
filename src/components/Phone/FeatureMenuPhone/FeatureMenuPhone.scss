@@ -1,0 +1,89 @@
+@use '@scssVariables' as v;
+
+.FeatureMenuPhone {
+  background: -webkit-linear-gradient(
+    0deg,
+    #0a226b,
+    #0a67ae
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    0deg,
+    #0a226b,
+    #0a67ae
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: v.$color-btn-auth;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  transition: transform 0.4s ease;
+  margin: 0;
+
+  &--closed {
+    transform: translateY(10em);
+    border: inherit;
+  }
+
+  &__menuBurger {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    padding: 1em 1em;
+  }
+
+  &--closed {
+    transform: translateY(10em);
+    border: inherit;
+  }
+
+  &__profileUser {
+    width: 100%;
+    color: v.$color-btn;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    &__singlePhone {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      color: v.$light-color;
+      //  padding-top: 0.8em;
+      font-size: 1em;
+      // padding: 0.5em 0.5em 0.5em 1em;
+      margin-bottom: 0.5em;
+      &__user {
+        color: v.$light-color;
+        font-weight: 400;
+        text-align: center;
+      }
+      &__toggle {
+        text-align: center;
+      }
+      &__feature {
+        color: v.$light-color;
+        font-size: 2.2em;
+        border-radius: 50%;
+        border: 2px solid v.$light-color;
+        padding: 0.5em;
+        margin: 0.5em;
+      }
+      &__feature:hover {
+        transform: translateY(-3px);
+        color: v.$light-color;
+      }
+    }
+  }
+  &__footer {
+    border-top: 1px solid v.$light-color;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5em 1em;
+    transition: transform 0.4s ease;
+    color: v.$light-color;
+  }
+}

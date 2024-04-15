@@ -1,0 +1,122 @@
+@use '@scssVariables' as v;
+
+.homeMenuPhone {
+  background: -webkit-linear-gradient(
+    0deg,
+    #0a226b,
+    #0a67ae
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    0deg,
+    #0a226b,
+    #0a67ae
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: v.$color-btn-auth;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  transition: transform 0.4s ease;
+  margin: 0;
+
+  &--close {
+    transform: translateY(12em);
+    border: inherit;
+  }
+
+  &__menuBurger {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    padding: 1em 1em;
+  }
+
+  &__profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__user {
+      font-weight: 400;
+    }
+    &__file {
+      // background-color: lightcyan;
+      border-radius: 50%;
+      width: 2.8em;
+      height: 2.8em;
+      border: 3px solid white;
+      box-shadow: 2px 3px 3px v.$box-shadow;
+    }
+    &__file:hover {
+      transform: translateY(-3px);
+    }
+    &__avatar {
+      // background-color: lightgreen;
+      color: v.$color-avatar;
+      font-size: 2.8em;
+      border-radius: 50%;
+    }
+    &__avatar:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  // &--close {
+  //   transform: translateY(12em);
+  //   border: inherit;
+  // }
+
+  &__profileUser {
+    width: 100%;
+    color: v.$color-btn;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    &__single {
+      color: v.$light-color;
+      padding-top: 0.8em;
+      font-size: 1em;
+      padding: 0.5em 0.5em 0.5em 1em;
+      &__user {
+        color: v.$light-color;
+        font-weight: 400;
+        text-align: center;
+      }
+      &__toggle {
+        text-align: center;
+      }
+      &__avatar {
+        color: v.$light-color;
+        font-size: 2.2em;
+        border-radius: 50%;
+      }
+      &__avatar:hover {
+        transform: translateY(-3px);
+        color: v.$light-color;
+      }
+      &__file {
+        // background-color: lightcyan;
+        border-radius: 50%;
+        width: 2.3em;
+        height: 2.3em;
+        border: 3px solid white;
+        box-shadow: 2px 3px 3px v.$box-shadow;
+        object-fit: cover;
+      }
+      &__file:hover {
+        transform: translateY(-3px);
+      }
+    }
+  }
+  &__footer {
+    border-top: 1px solid v.$light-color;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5em 1em;
+    transition: transform 0.4s ease;
+    color: v.$light-color;
+  }
+}

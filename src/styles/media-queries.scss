@@ -1,0 +1,396 @@
+//! AUTHENTIFICATION
+/*
+    Styles pour les écrans de moins de 350px de large : MOBILE S
+*/
+@media screen and (max-width: 318px) {
+  .headerSignTitle {
+    font-size: 0.6em;
+  }
+  .containerSign__main {
+    // height: 48vh;
+    width: 90%;
+    &__header {
+      padding: 0;
+      margin-top: 0;
+    }
+    &__titleSign {
+      padding-top: 0.7em;
+    }
+  }
+  .containerSign__mainSign {
+    //   height: 70vh;
+    width: 90%;
+
+    &__titleSign {
+      font-size: 1em;
+    }
+    &__form {
+      &__button {
+        width: 75%;
+      }
+    }
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 450px de large : MOBILE M
+  */
+@media (min-width: 319px) and (max-width: 374px) {
+  .headerSignTitle {
+    font-size: 0.6em;
+  }
+  .containerSign__main {
+    // height: 48vh;
+    width: 90%;
+    &__header {
+      padding: 0;
+      margin-top: 0;
+    }
+    &__titleSign {
+      padding-top: 0.7em;
+    }
+    &__link {
+      font-size: 0.6em;
+    }
+    &__main__button {
+      width: 75%;
+    }
+  }
+  .containerSign__mainSign {
+    // height: 70vh;
+    width: 90%;
+
+    &__titleSign {
+      font-size: 1em;
+    }
+    &__form {
+      &__button {
+        width: 75%;
+      }
+    }
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 450px de large : MOBILE L
+  */
+@media (min-width: 375px) and (max-width: 424px) {
+  .headerSignTitle {
+    font-size: 0.6em;
+  }
+
+  .containerSign__main {
+    // height: 48vh;
+    width: 80%;
+    &__header {
+      padding: 0;
+      margin-top: 1em;
+    }
+    &__titleSign {
+      padding-top: 0.7em;
+    }
+  }
+  .containerSign__mainSign {
+    //  height: 70vh;
+    width: 80%;
+
+    &__titleSign {
+      font-size: 1em;
+    }
+    &__form {
+      &__button {
+        width: 75%;
+      }
+    }
+  }
+
+  .containerSign__main__main__button {
+    width: 80%;
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 758px de large : TABLETTE
+  */
+@media (min-width: 425px) and (max-width: 758px) {
+  .containerSign__main {
+    // height: 55vh;
+    width: 70%;
+    &__header {
+      padding: 0;
+      margin-top: 1.5em;
+    }
+    &__titleSign {
+      font-size: 1.3em;
+    }
+  }
+  .containerSign__mainSign {
+    // height: 70vh;
+    width: 70%;
+    &__titleSign {
+      font-size: 1.3em;
+    }
+    &__form {
+      &__button {
+        width: 80%;
+      }
+    }
+  }
+  .containerSign__main__main__button {
+    width: 80%;
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 759px de large : LAPTOP
+  */
+@media (min-width: 759px) and (max-width: 1023px) {
+  .containerSign__main {
+    // height: 55vh;
+    width: 40%;
+  }
+  .containerSign__mainSign {
+    //  height: 70vh;
+    width: 40%;
+    &__titleSign {
+      font-size: 1.4em;
+    }
+  }
+
+  .containerSign__main__main__button {
+    width: 80%;
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 758px de large : LAPTOP L
+  */
+@media (min-width: 1024px) and (max-width: 1041px) {
+  .headerSignTitle {
+    margin-top: 0;
+  }
+  .containerSign__main {
+    width: 40%;
+  }
+  .containerSign__main__main__button {
+    width: 80%;
+  }
+}
+
+//! HOMMENU
+/*
+      Styles pour les écrans de moins de 425px de large : MOBILE L
+  */
+@media screen and (max-width: 425px) {
+  .container__content__title {
+    padding-top: 0;
+  }
+  .container__content__main {
+    padding: 0;
+  }
+}
+/*
+      Styles pour les écrans de moins de 499px de large : MOBILE L
+  */
+@media screen and (max-width: 499px) {
+  .container__content__title {
+    font-size: 1em;
+  }
+}
+
+//! FEATURE
+
+/*
+      Styles pour les écrans de moins de 758px de large : TABLETTE
+  */
+@media screen and (max-width: 758px) {
+  .container__F__title {
+    font-size: 1.5em;
+    text-align: center;
+    padding-top: 0;
+    margin: 1em;
+  }
+  .container__S__main {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin-top: 1em;
+    flex-direction: column;
+    align-items: center;
+
+    &__section {
+      width: 70%;
+    }
+  }
+
+  .container__P__main {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin-top: 1em;
+    flex-direction: column;
+    align-items: center;
+
+    &__section {
+      width: 70%;
+    }
+  }
+}
+
+//! textarea Rules
+
+/*
+    Styles pour les écrans de moins de 350px de large : MOBILE S
+*/
+@media screen and (max-width: 319px) {
+  .container {
+    &__R {
+      &__main {
+        padding: 1em 1em 4em 1em;
+        &__form {
+          &__rules {
+            width: 290px;
+            height: 100vh;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 450px de large : MOBILE M
+  */
+@media (min-width: 320px) and (max-width: 374px) {
+  .container {
+    &__R {
+      &__main {
+        padding: 1em 1em 4em 1em;
+        &__form {
+          &__rules {
+            width: 330px;
+            height: 100vh;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 450px de large : MOBILE L
+  */
+@media (min-width: 375px) and (max-width: 424px) {
+  .container {
+    &__R {
+      &__main {
+        padding: 1em 1.5em 4em 1.5em;
+        &__form {
+          &__rules {
+            width: 380px;
+            height: 100vh;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 758px de large : TABLETTE
+  */
+@media (min-width: 425px) and (max-width: 758px) {
+  .container {
+    &__R {
+      &__main {
+        padding: 1em 2em 4em 2em;
+        &__form {
+          &__rules {
+            width: 410px;
+            height: 100vh;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 759px de large : LAPTOP
+  */
+@media (min-width: 759px) and (max-width: 1023px) {
+  .container {
+    &__R {
+      &__main {
+        padding: 1em 2em 4em 2em;
+        &__form {
+          &__rules {
+            width: 750px;
+            height: 100vh;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 758px de large : LAPTOP L
+  */
+@media (min-width: 1024px) and (max-width: 1041px) {
+  .container {
+    &__R {
+      &__main {
+        padding: 1em 2em 4em 2em;
+        &__form {
+          &__rules {
+            width: 740px;
+            height: 100vh;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+      Styles pour les écrans de moins de 758px de large : 4K
+  */
+@media (min-width: 1042px) and (max-width: 2600px) {
+  .container {
+    &__R {
+      margin: auto;
+      &__main {
+        padding: 1em 2em 4em 2em;
+        &__form {
+          &__rules {
+            width: 1000px;
+            height: 100vh;
+          }
+        }
+      }
+    }
+  }
+}
+
+// //! SCROLL VIEW
+
+// /*
+//       Styles pour les écrans de moins de 758px de large :
+//   */
+// @media screen and (max-width: 500px) {
+//   .container__content {
+//     // overflow: auto;
+//     height: calc(100vh - 13em);
+//   }
+
+//   .container {
+//     // overflow: auto;
+//     height: calc(100vh - 2em); // hauteur par défaut lorsque le menu est fermé
+//   }
+
+//   .container.menuOpen {
+//     // overflow: auto;
+//     height: calc(100vh - 13em); // hauteur lorsque le menu est ouvert
+//   }
+// }

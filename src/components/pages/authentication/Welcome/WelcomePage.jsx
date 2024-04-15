@@ -1,12 +1,14 @@
+import { NavLink } from 'react-router-dom';
 import HeaderSign from '../../../HeaderSign/HeaderSign';
 import HeaderSignTitle from '../../../HeaderSignTitle/HeaderSignTitle';
-import { NavLink } from 'react-router-dom';
 import './WelcomePage.scss';
 
 export default function WelcomePage() {
   return (
-    <>
-      <HeaderSign />
+    <div>
+      <div className="headerSign">
+        <HeaderSign />
+      </div>
       <div className="containerSign">
         <HeaderSignTitle />
         <div className="containerSign__main">
@@ -29,6 +31,6 @@ export default function WelcomePage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

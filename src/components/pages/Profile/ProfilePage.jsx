@@ -1,9 +1,7 @@
 import './ProfilePage.scss';
-import Header from '../../Header/Header';
-import { useState } from 'react';
+import { format, parseISO } from 'date-fns';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import FeatureMenu from '../../FeatureMenu/FeatureMenu';
-import Footer from '../../Footer/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleUser,
@@ -19,196 +17,408 @@ import {
   faPenToSquare,
   faWheatAwnCircleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
-import { updateEditedProfileData } from '../../../store/userSlice';
+import { useMediaQuery } from 'react-responsive';
+import Header from '../../Header/Header';
+import FeatureMenu from '../../FeatureMenu/FeatureMenu';
+import Footer from '../../Footer/Footer';
+
+import Allergies from '../../Allergies/Allergies';
+import { togglePetProfile, uploadAvatar } from '../../../store/userSlice';
+import FeatureMenuPhone from '../../Phone/FeatureMenuPhone/FeatureMenuPhone';
+import HeaderPhoneProfile from '../../Phone/HeaderPhoneProfile/HeaderPhoneProfile';
+import AvatarUpload from '../../AvatarUpload/AvatarUpload';
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
-  const [toggleReact, setToggleReact] = useState(true);
+
+  // const [toggleReact, setToggleReact] = useState(true);
   const [editMode, setEditMode] = useState(false);
-  const [editingBirthDate, setEditingBirthDate] = useState('');
-  const [editingProfession, setEditingProfession] = useState('');
-  const [editingWorkTimetable, setEditingWorkTimetable] = useState('');
-  const [editingEmergencyName, setEditingEmergencyName] = useState('');
-  const [editingEmergencyLink, setEditingEmergencyLink] = useState('');
-  const [editingEmergencyNumber, setEditingEmergencyNumber] = useState('');
 
-  const birthDate = useSelector((state) => state.user.birthDate);
-  const profession = useSelector((state) => state.user.profession);
-  const workTimetable = useSelector((state) => state.user.work_time_table);
-  const emergencyName = useSelector((state) => state.user.emergency_name);
-  const emergencyLink = useSelector((state) => state.user.emergency_link);
-  const emergencyNumber = useSelector((state) => state.user.emergency_number);
+  const isMobile = useMediaQuery({ query: '(min-width: 500px)' });
 
-  const toggleToggle = () => {
-    setToggleReact(!toggleReact);
+  const [editingData, setEditingData] = useState({});
+  // console.log('----> editing', editingData);
+
+  // stocker l'url de l'image
+  const [previewUrl, setPreviewUrl] = useState('');
+
+  const formatDate = (date) => {
+    if (!date) return ''; // Ajoutez cette vérification pour éviter les dates indéfinies
+    return format(parseISO(date), 'dd/MM/yyyy');
   };
-  const toggleEditMode = () => {
-    if (!editMode) {
-      setEditingBirthDate(birthDate);
+
+  useEffect(() => {
+    // Get user informations when loading the component
+    dispatch({ type: 'GET_USER_INFORMATIONS' });
+  }, [dispatch]);
+
+  const userData = useSelector((state) => state.user.userData);
+  console.log('userData', userData.avatar_file);
+
+  // faire apparaitre les données après modification
+  useEffect(() => {
+    // console.log('Useeffect', userData[0]);
+    if (userData) {
+      // console.log('Profile', userData);
+      setEditingData(userData);
     }
+  }, [userData]);
+
+  /* const toggleToggle = () => {
+    setToggleReact(!toggleReact);
+  }; */
+  const toggleEditMode = () => {
+    // si userlogged oui sinon pas de modification de profil
     setEditMode(!editMode);
+    //  console.log('toggleEditMode');
   };
+
+  const handleProfileChange = (event) => {
+    const { name, value } = event.target;
+    setEditingData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    // console.log('---> handleProfileChange', name, value);
+  };
+
+  const handleSave = (e) => {
+    // Dispatchez l'action pour mettre à jour les données avec l'état d'édition
+    e.preventDefault();
+    dispatch({ type: 'PATCH_USER_INFORMATIONS', payload: editingData });
+    // get out of edit mode
+    setEditMode(false);
+  };
+  // Show age next to date of birth
+  function calculateAge(birthdate) {
+    const diff = Date.now() - new Date(birthdate).getTime();
+    const ageDate = new Date(diff);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+  const { birthdate } = userData;
 
   return (
     <div className="container">
-      <div className="container__nav">
-        <FeatureMenu />
-      </div>
-      <div className="container__content">
-        <div className="container__content__header">
-          <Header />
+      {isMobile ? (
+        <div className="container__nav">
+          <FeatureMenu />
         </div>
-        <div className="container__content__title">
-          <FontAwesomeIcon icon={faCircleUser} size="2xl" />
-          <FontAwesomeIcon icon={faPen} />
-          <button
-            type="button"
-            className="container__content__title__button"
-            onClick={toggleEditMode}
-          >
-            <FontAwesomeIcon icon={faPen} />
-            {editMode ? 'Annuler' : 'Modifier le profil'}
-          </button>
-          <h5>Nom et Prénom</h5>
+      ) : (
+        <div className="container__nav__phone">
+          <FeatureMenuPhone />
         </div>
-        <div className="container__content__main">
-          <div className="container__content__main__section">
-            <div className="container__content__main__section__article">
-              <FontAwesomeIcon icon={faCakeCandles} />
-              <h5>{editMode ? 'Anniversaire' : 'Anniversaire'}</h5>
+      )}
+      <div className="container__P">
+        {isMobile ? (
+          <div className="container__P__header">
+            <Header />
+          </div>
+        ) : (
+          <div className="container__P__headerPhone">
+            <HeaderPhoneProfile />
+          </div>
+        )}
+
+        <div className="container__P__title">
+          <div className="container__P__title__user">
+            {userData.avatar_file ? (
+              <img
+                src={`http://localhost:3000/${userData.avatar_file}`}
+                // src={userData.avatar_file}
+                alt="Avatar"
+                className="container__P__title__file"
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faCircleUser}
+                size="2xl"
+                className="container__P__title__avatar"
+              />
+            )}
+            <AvatarUpload />
+
+            <h5 className="container__P__title__name">
+              {userData.firstname
+                ? `${userData.firstname} ${userData.lastname}`
+                : 'Bienvenue'}
+            </h5>
+          </div>
+          <div className="container__P__title__edit">
+            <button
+              type="button"
+              className="container__P__title__edit__button"
+              onClick={toggleEditMode}
+            >
+              {editMode ? 'Annuler' : 'Modifier le profil'}
+              <FontAwesomeIcon
+                icon={faPen}
+                className="container__P__title__edit__button__icone"
+              />
+            </button>
+            {editMode && (
+              <button
+                type="button"
+                onClick={handleSave}
+                className="container__P__title__edit__buttonSave"
+              >
+                Sauvegarder
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="container__P__main">
+          <div className="container__P__main__section">
+            <div className="container__P__main__section__article">
+              <div className="container__P__main__section__article__header">
+                <FontAwesomeIcon
+                  icon={faCakeCandles}
+                  className="container__P__main__section__article__header__icone"
+                />
+                <h5 className="container__P__main__section__article__header__title">
+                  Anniversaire
+                </h5>
+              </div>
               {editMode ? (
                 <input
-                  className="containerSign__form__input"
+                  className="container__P__main__section__article__input"
                   type="date"
-                  name="birthDate"
-                  value={editingBirthDate}
+                  name="birthdate"
+                  value={format(parseISO(editingData.birthdate), 'yyyy-MM-dd')}
                   placeholder="00/00/0000"
-                  onChange={(e) => setEditingBirthDate(e.target.value)}
+                  onChange={handleProfileChange}
                 />
               ) : (
-                <p>{birthDate}</p>
+                <p className="container__P__main__section__article__paraph">
+                  {formatDate(userData.birthdate)} - {calculateAge(birthdate)}{' '}
+                  ans
+                </p>
               )}
             </div>
-            <div className="container__content__main__section__article">
-              <FontAwesomeIcon icon={faBriefcase} />
-              <h5>{editMode ? 'Travail' : 'Travail'}</h5>
+            <div className="container__P__main__section__article">
+              <div className="container__P__main__section__article__header">
+                <FontAwesomeIcon
+                  icon={faBriefcase}
+                  className="container__P__main__section__article__header__icone"
+                />
+                <h5 className="container__P__main__section__article__header__title">
+                  Travail
+                </h5>
+              </div>
               {editMode ? (
                 <input
-                  className="containerSign__form__input"
+                  className="container__P__main__section__article__input"
                   type="text"
                   name="profession"
-                  value={editingProfession}
+                  value={editingData.profession}
                   placeholder="Métier"
-                  onChange={(e) => setEditingProfession(e.target.value)}
+                  onChange={handleProfileChange}
                 />
               ) : (
-                <p>{profession}</p>
+                <p className="container__P__main__section__article__paraph">
+                  {userData.profession}
+                </p>
               )}
             </div>
-            <div className="container__content__main__section__article">
-              <FontAwesomeIcon icon={faClock} />
-              <h5>{editMode ? 'Horaire de Travail' : 'Horaire de Travail'}</h5>
+
+            <div className="container__P__main__section__article">
+              <div className="container__P__main__section__article__header">
+                <FontAwesomeIcon
+                  icon={faClock}
+                  className="container__P__main__section__article__header__icone"
+                />
+                <h5 className="container__P__main__section__article__header__title">
+                  Horaire de Travail
+                </h5>
+              </div>
               {editMode ? (
                 <input
-                  className="containerSign__form__input"
+                  className="container__P__main__section__article__input"
                   type="text"
-                  name="work_time_table"
-                  value={editingWorkTimetable}
+                  name="worktime_table"
+                  value={editingData.worktime_table}
                   placeholder="00h-00h"
-                  onChange={(e) => setEditingWorkTimetable(e.target.value)}
+                  onChange={handleProfileChange}
                 />
               ) : (
-                <p>{workTimetable}</p>
+                <p className="container__P__main__section__article__paraph">
+                  {userData.worktime_table}
+                </p>
               )}
             </div>
-            <h5>Animaux</h5>
-            <FontAwesomeIcon icon={faPaw} />
-            <div
-              className="Menu__profile__toggle"
-              role="button"
-              tabIndex={0}
-              onClick={toggleToggle}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  toggleToggle();
-                }
-              }}
-            >
-              {toggleReact ? (
-                <FontAwesomeIcon icon={faToggleOn} size="2xl" />
-              ) : (
-                <FontAwesomeIcon icon={faToggleOff} size="2xl" />
-              )}
+            <div className="container__P__main__section__article">
+              <div className="container__P__main__section__article__header">
+                <FontAwesomeIcon
+                  icon={faPaw}
+                  className="container__P__main__section__article__header__icone"
+                />
+                <h5 className="container__P__main__section__article__header__title">
+                  Animaux
+                </h5>
+              </div>
+              <div className="container__P__main__section__article__header__main">
+                <p className="container__P__main__section__article__paraph">
+                  Possède-tu des animaux?
+                </p>
+                <div
+                  className="container__P__main__section__article__header__main__toggle"
+                  role="button"
+                  tabIndex={0}
+                  name="pet"
+                  value={userData.pet}
+                  onClick={() => {
+                    const action = togglePetProfile(userData.pet);
+                    dispatch(action);
+                    dispatch({
+                      type: 'PATCH_USER_INFORMATIONS',
+                    });
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      const action = togglePetProfile(userData.pet);
+                      dispatch(action);
+                      dispatch({
+                        type: 'PATCH_USER_INFORMATIONS',
+                      });
+                    }
+                  }}
+                >
+                  {userData.pet ? (
+                    <FontAwesomeIcon
+                      icon={faToggleOn}
+                      size="xl"
+                      style={{ color: '#4fd166' }}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faToggleOff}
+                      size="xl"
+                      style={{ color: '#1a4581' }}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
-            <div className="container__content__main__section__article">
-              <FontAwesomeIcon icon={faHeartPulse} />
-              <h5>
-                {editMode ? 'Personne à prévenir' : 'Personne à prévenir'}
-              </h5>
+            <div className="container__P__main__section__article">
+              <div className="container__P__main__section__article__header">
+                <FontAwesomeIcon
+                  icon={faHeartPulse}
+                  className="container__P__main__section__article__header__icone"
+                />
+                <h5 className="container__P__main__section__article__header__title">
+                  Personne à prévenir
+                </h5>
+              </div>
               {editMode ? (
                 <>
                   <input
-                    className="containerSign__form__input"
+                    className="container__P__main__section__article__input"
                     type="text"
                     name="emergency_name"
-                    value={editingEmergencyName}
+                    value={editingData.emergency_name}
                     placeholder="Mme Dubois"
-                    onChange={(e) => setEditingEmergencyName(e.target.value)}
+                    onChange={handleProfileChange}
                   />
                   <input
-                    className="containerSign__form__input"
+                    className="container__P__main__section__article__input"
                     type="text"
                     name="emergency_link"
-                    value={editingEmergencyLink}
+                    value={editingData.emergency_link}
                     placeholder="Maman"
-                    onChange={(e) => setEditingEmergencyLink(e.target.value)}
+                    onChange={handleProfileChange}
                   />
                   <input
-                    className="containerSign__form__input"
-                    type="number"
+                    className="container__P__main__section__article__input"
+                    type="tel"
                     name="emergency_number"
-                    value={editingEmergencyNumber}
+                    value={editingData.emergency_number}
                     placeholder="00.00.00.00.00."
-                    onChange={(e) => setEditingEmergencyNumber(e.target.value)}
+                    onChange={handleProfileChange}
                   />
                 </>
               ) : (
                 <div>
-                  <p>{emergencyName}</p>
-                  <p>{emergencyLink}</p>
-                  <p>{emergencyNumber}</p>
+                  <p className="container__P__main__section__article__paraph">
+                    {userData.emergency_name}
+                  </p>
+                  <p className="container__P__main__section__article__paraph">
+                    {userData.emergency_link}
+                  </p>
+                  <p className="container__P__main__section__article__paraph">
+                    {userData.emergency_number}
+                  </p>
                 </div>
               )}
             </div>
           </div>
-          <div className="container__content__main__section">
-            <h5>Téléphone</h5>
-            <FontAwesomeIcon icon={faPhone} />
-            <p>00.00.00.00.00.</p>
-            <h5>Description</h5>
-            <FontAwesomeIcon icon={faPenToSquare} />
-            <p>lorem ipsum </p>
-            <h5>Allergies</h5>
-            <FontAwesomeIcon icon={faWheatAwnCircleExclamation} />
-            <p>Gluten, lactose, oeufs</p>
+          <div className="container__P__main__section">
+            <div className="container__P__main__section__article">
+              <div className="container__P__main__section__article__header">
+                <FontAwesomeIcon
+                  icon={faPhone}
+                  className="container__P__main__section__article__header__icone"
+                />
+                <h5 className="container__P__main__section__article__header__title">
+                  Téléphone
+                </h5>
+              </div>
+              {editMode ? (
+                <input
+                  className="container__P__main__section__article__input"
+                  type="tel"
+                  name="phone_number"
+                  value={editingData.phone_number}
+                  placeholder="00.00.00.00.00."
+                  onChange={handleProfileChange}
+                />
+              ) : (
+                <p className="container__P__main__section__article__paraph">
+                  {userData.phone_number}
+                </p>
+              )}
+            </div>
+            <div className="container__P__main__section__article">
+              <div className="container__P__main__section__article__header">
+                <FontAwesomeIcon
+                  icon={faPenToSquare}
+                  className="container__P__main__section__article__header__icone"
+                />
+                <h5 className="container__P__main__section__article__header__title">
+                  Description
+                </h5>
+              </div>
+              {editMode ? (
+                <textarea
+                  className="container__P__main__section__article__description"
+                  type="text"
+                  name="description"
+                  value={editingData.description}
+                  placeholder="Décris toi en quelque mots"
+                  onChange={handleProfileChange}
+                />
+              ) : (
+                <p className="container__P__main__section__article__paraph">
+                  {userData.description}
+                </p>
+              )}
+            </div>
+            <div className="container__P__main__section__article">
+              <div className="container__P__main__section__article__header">
+                <FontAwesomeIcon
+                  icon={faWheatAwnCircleExclamation}
+                  className="container__P__main__section__article__header__icone"
+                />
+                <h5 className="container__P__main__section__article__header__title">
+                  Allergies
+                </h5>
+              </div>
+              <div>
+                <Allergies />
+              </div>
+            </div>
           </div>
-          {editMode && (
-            <button
-              type="button"
-              onClick={() =>
-                dispatch(
-                  updateEditedProfileData({
-                    field: 'birthDate',
-                    value: editingBirthDate,
-                  })
-                )
-              }
-            >
-              Sauvegarder
-            </button>
-          )}
         </div>
-        <div className="container__content__footer">
+
+        <div className="container__P__footer">
           <Footer />
         </div>
       </div>

@@ -2,16 +2,39 @@
 $menuWidth: 13rem;
 $menuHeight: 100vh;
 
+$color-avatar: #9fc9f0;
+$color-avatar-other: #a8c0d8;
+$color-avatar-hover: #134074;
+$color-card: #a8c0d8;
+$color-card-hover: #8da9c4;
+$color-inset-focus: #3171ca; // pour inset input auithentification au focus
+
 // BUTTON
-$color-btn: rgb(76, 76, 170);
-$color-btn-hover: rgb(63, 63, 143);
+$color-btn: #1a4581;
+$color-btn-hover: #0b2545;
+$color-btn-delete: #e73f41;
+$color-btn-delete-hover: #c03436;
+
+// BUTTON AUTHENTIFICATION
+$color-btn-auth: #f1f7ff;
+$color-btn-auth-hover: #0b2545;
+$color-text-auth: #1a4581;
+$color-text-auth-hover: #f1f7ff;
 
 // COLORS
 $light-blue: #bddcf0;
 $light-grey: #818385;
 $dark-grey: #333333;
 $light-color: white;
-$error-color: #ff0000;
+$error-color: #e73f41;
+$color-valid: #4fd166;
+$color-valid-hover: #31a346;
 
 // TEXT
 $light-color: white;
+
+// SHADOW
+$box-shadow: #0a226b;
+
+// BACKGROUND AUTHENTIFICATION
+$color-bg: rgb(11, 37, 69);

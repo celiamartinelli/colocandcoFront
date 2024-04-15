@@ -1,1 +1,72 @@
 @use '@scssVariables' as v;
+
+.app {
+  width: 90%;
+  max-width: 500px;
+  margin: 3em auto 2rem auto;
+}
+
+.form-item {
+  // width: 100%;
+  // //color: blue /* v.$clr-white */;
+  // font-size: 2em;
+  // // background: #3f7ff7 /* v.$clr-primary-dark */;
+  // border: 1px solid rgb(2, 2, 8) /* v.$clr-primary-darker */;
+  // box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.1);
+  // padding: 1rem;
+  // border-radius: 2px;
+  // border-radius: 6px;
+  border-bottom: 2px solid #9fc9f0;
+  width: 95%;
+  padding: 0.5em;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+  color: #6f99d3;
+  background-color: #f1f7ff;
+  box-shadow: inset 0.1em 0.1em 0.6em #c7e1fa;
+}
+.form-item:hover,
+.form-item:focus {
+  border-color: v.$color-text-auth;
+}
+
+.form-item::placeholder {
+  color: v.$color-inset-focus;
+}
+.list {
+  margin-top: 2em;
+}
+.list-item {
+  display: block;
+  // background: #7ea7f3 /* v.$clr-grey */;
+  border-radius: 3px;
+  // padding: 1rem;
+  margin: 0.5rem 0;
+
+  &--done {
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
+}
+
+.task-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-item {
+  flex: 1; /* Ajustez la flexibilité pour que le label occupe l'espace restant */
+}
+
+.delete-button {
+  background: none;
+  color: v.$color-btn;
+  border: none;
+  cursor: pointer;
+  padding: 0; /* Ajustez les espacements selon vos besoins */
+  margin-left: 10px; /* Ajustez la marge à votre convenance */
+}
+.input-container {
+  position: relative;
+}

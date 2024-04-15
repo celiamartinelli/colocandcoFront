@@ -1,73 +1,126 @@
 import './RulesPage.scss';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import FeatureMenuPhone from '../../Phone/FeatureMenuPhone/FeatureMenuPhone';
+import HeaderPhoneProfile from '../../Phone/HeaderPhoneProfile/HeaderPhoneProfile';
 import Header from '../../Header/Header';
 import FeatureMenu from '../../FeatureMenu/FeatureMenu';
 import Footer from '../../Footer/Footer';
 
 export default function RulesPage() {
+  const dispatch = useDispatch();
+  const [editMode, setEditMode] = useState(false);
+  const [showRulesContent, setShowRulesContent] = useState([]);
+
+  const isMobile = useMediaQuery({ query: '(min-width: 500px)' });
+
+  // Show rules content
+  useEffect(() => {
+    dispatch({ type: 'GET_RULES_CONTENT' });
+  }, []);
+
+  const content = useSelector((state) => state.feature.content);
+  // show rules content modification
+  useEffect(() => {
+    if (content[0]?.content) {
+      setShowRulesContent(content[0].content);
+    }
+  }, [content]);
+
+  // toogle edit mode
+  const toggleEditMode = () => {
+    setEditMode(!editMode);
+  };
+
+  // modification in the input
+  const handleRulesChange = (event) => {
+    setShowRulesContent(event.target.value);
+  };
+
+  // validation of the form sends modification to the database and refresh data modify
+  const handleValidation = (e) => {
+    e.preventDefault();
+    dispatch({ type: 'PATCH_RULES', payload: showRulesContent });
+    dispatch({ type: 'GET_RULES', payload: showRulesContent });
+    setEditMode(false);
+  };
+
   return (
     <div className="container">
-      <div className="container__nav">
-        <FeatureMenu />
-      </div>
-      <div className="container__content">
-        <div className="container__content__header">
-          <Header />
+      {isMobile ? (
+        <div className="container__nav">
+          <FeatureMenu />
         </div>
-        <div className="container__content__title">
-          <h2>Réglement Intérieur</h2>
-          <h3>Etablissez vos règle de vie commune</h3>
+      ) : (
+        <div className="container__nav__phone">
+          <FeatureMenuPhone />
         </div>
-        <div className="container__content__main">
-          <h3> Règlement Intérieur de la Colocation</h3>
-
-          <p>
-            {' '}
-            1: Objet Le présent règlement intérieur a pour objet de définir les
-            règles de vie commune au sein de la colocation située à [adresse
-            complète]. Article 2: Respect Mutuel Chaque colocataire s'engage à
-            respecter les autres membres de la colocation. Le respect mutuel est
-            essentiel pour maintenir un environnement harmonieux. Article 3:
-            Utilisation des Espaces Communs Les espaces communs tels que la
-            cuisine, le salon, et les salles de bains doivent être maintenus
-            propres et rangés après utilisation. Chaque colocataire est
-            responsable du nettoyage de ses propres espaces. Article 4: Partage
-            des Charges Les charges liées au logement, telles que l'électricité,
-            l'eau, le chauffage, et l'accès à Internet, seront réparties
-            équitablement entre tous les colocataires. Un système équitable de
-            contribution doit être mis en place. Article 5: Respect des Heures
-            de Repos Chaque colocataire s'engage à respecter les heures de repos
-            des autres membres de la colocation. Les bruits excessifs, les fêtes
-            tardives, ou toute autre activité perturbatrice sont interdits
-            pendant les heures de repos. Article 6: Invités Les invités sont les
-            bienvenus, mais chaque colocataire doit informer les autres membres
-            de la colocation de la présence d'invités à l'avance. Les invités ne
-            sont pas autorisés à rester pendant une période prolongée sans le
-            consentement unanime des colocataires. Article 7: Interdiction de
-            Fumer Il est strictement interdit de fumer à l'intérieur de la
-            colocation. Des zones désignées à l'extérieur peuvent être utilisées
-            pour fumer, en veillant à maintenir la propreté de ces zones.
-            Article 8: Gestion des Courses La gestion des courses communes,
-            telle que l'achat de produits ménagers ou d'épicerie partagée, doit
-            être discutée et organisée de manière à garantir une répartition
-            équitable des responsabilités et des coûts. Article 9: Maintenance
-            et Réparations Tout problème de maintenance ou de réparation doit
-            être signalé immédiatement au propriétaire ou au gestionnaire du
-            logement. Les frais de réparation nécessaires en raison d'une
-            négligence ou d'une utilisation inappropriée seront partagés entre
-            les colocataires responsables. Article 10: Résolution des Conflits
-            En cas de conflit, les colocataires s'engagent à résoudre la
-            situation de manière constructive. La communication ouverte et le
-            respect des opinions de chacun sont encouragés. En cas de désaccord
-            persistant, une médiation peut être envisagée. Article 11:
-            Modification du Règlement Toute modification du présent règlement
-            intérieur doit être discutée et acceptée à l'unanimité par tous les
-            membres de la colocation. En signant ce règlement intérieur, chaque
-            colocataire reconnaît avoir pris connaissance des règles énoncées et
-            s'engage à les respecter.
-          </p>
+      )}
+      <div className="container__T">
+        {isMobile ? (
+          <div className="container__T__header">
+            <Header />
+          </div>
+        ) : (
+          <div className="container__T__headerPhone">
+            <HeaderPhoneProfile />
+          </div>
+        )}
+        <div className="container__F__title">
+          <h2 className="container__F__title__page">Règlement Intérieur</h2>
+          <h3 className="container__F__title__h3">
+            Etablissez vos règles de vie commune
+          </h3>
         </div>
-        <div className="container__content__footer">
-          <Footer />
+        <div className="container__R">
+          <div className="container__P__title__edit">
+            <button
+              type="button"
+              className="container__P__title__edit__button"
+              onClick={toggleEditMode}
+            >
+              {editMode ? 'Annuler' : 'Modifier le profil'}
+              <FontAwesomeIcon
+                icon={faPen}
+                className="container__P__title__edit__button__icone"
+              />
+            </button>
+            {editMode && (
+              <button
+                type="button"
+                onClick={handleValidation}
+                className="container__P__title__edit__buttonSave"
+              >
+                Sauvegarder
+              </button>
+            )}
+          </div>
+          <div className="container__R__main">
+            {editMode ? (
+              <textarea
+                className="container__R__main__form__rules"
+                onChange={handleRulesChange}
+                value={showRulesContent}
+              />
+            ) : (
+              <div className="container__R__main__form">
+                {content.length > 0 &&
+                  content.map((rule) => (
+                    <div key="1">
+                      {rule.content.split('\n').map((article, index) => (
+                        <p key={index}> {article} </p>
+                      ))}
+                    </div>
+                  ))}
+              </div>
+            )}
+          </div>
+          <div className="container__content__footer">
+            <Footer />
+          </div>
         </div>
       </div>
     </div>

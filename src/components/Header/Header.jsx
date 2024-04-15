@@ -11,8 +11,8 @@ export default function Header() {
   const navigate = useNavigate();
 
   const logged = useSelector((state) => state.user.logged);
-  console.log('Logged status:', logged);
-  // Ajoutez un état local pour suivre si la pop-up doit être affichée ou non
+  // console.log('Logged status:', logged);
+  // Add local state to track whether the pop-up should be shown or not
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleLogout = () => {
@@ -26,16 +26,16 @@ export default function Header() {
   };
   return (
     <div>
-      {logged ? (
-        <div className="header">
-          <NavLink to="/" className="header__home">
-            Coloc&co
-          </NavLink>
-          <NavLink to="/settings">
-            <FontAwesomeIcon icon={faGear} />
-          </NavLink>
+      <div className="header">
+        <NavLink to="/" className="header__home">
+          Coloc&co
+        </NavLink>
+        <NavLink to="/settings">
+          <FontAwesomeIcon icon={faGear} />
+        </NavLink>
 
-          <div className="logout__container">
+        {logged ? (
+          <div className="header__logout">
             <FontAwesomeIcon
               icon={faPowerOff}
               role="button"
@@ -57,10 +57,10 @@ export default function Header() {
               </div>
             )}
           </div>
-        </div>
-      ) : (
-        <p>L'utilisateur n'est pas connecté</p>
-      )}
+        ) : (
+          <p>Logout</p>
+        )}
+      </div>
     </div>
   );
 }

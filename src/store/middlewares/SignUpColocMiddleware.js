@@ -3,40 +3,40 @@
 import {
   handleSuccessfullSignUpColoc,
   updateCreateGroupColocError,
-} from './userSlice';
+} from '../userSlice';
 
 const SignUpColocMiddleware = (store) => (next) => (action) => {
   if (action.type === 'CREATE_GROUP') {
-    console.log('Middleware de Création de Groupe de Colocation');
+    // console.log('Middleware de Création de Groupe de Colocation');
 
-    fetch('http://localhost:3000/user/', {
+    fetch('http://localhost:3000/user/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       mode: 'cors',
       body: JSON.stringify({
-        groupname: store.getState().user.groupname,
+        groupName: store.getState().user.group_name,
         email: store.getState().user.email,
         password: store.getState().user.password,
-        confirmpassword: store.getState().user.confirmpassword,
+        confirmPassword: store.getState().user.confirm_password,
       }),
     })
       // receive the response(data) in json format
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (!res.ok) {
           throw new Error('Something went wrong');
         }
         return res.json();
       })
       .then((data) => {
-        console.log('Server response:', data);
+        // console.log('Server response:', data);
 
         // Dispatch the action to update the store (userSlice)
         const signUpColocAction = handleSuccessfullSignUpColoc(data);
-        console.log('createGroupAction:', signUpColocAction);
-
+        // console.log('createGroupAction:', signUpColocAction);
+        // envoyer le user_id
         store.dispatch(signUpColocAction);
       })
 

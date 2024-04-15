@@ -1,12 +1,24 @@
 @use '@scssVariables' as v;
 
 .homeMenu {
-  border-right: 1px solid lightgray;
+  border-right: 1px solid v.$color-avatar;
   width: 13em;
   height: 100vh;
-  position: relative;
+  position: sticky;
+  top: 100000;
   z-index: 10;
   transition: transform 0.4s ease;
+  background: -webkit-linear-gradient(
+    0deg,
+    #0a226b,
+    #0a67ae
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    0deg,
+    #0a226b,
+    #0a67ae
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: v.$color-btn-auth;
 
   &--close {
     transform: translateX(-11em);
@@ -16,45 +28,115 @@
   &__menuBurger {
     display: flex;
     justify-content: flex-end;
-    padding: 0.5em 0.5em 0.5em 1em;
+    padding: 0.5em 0.5em 0 1em;
   }
 
   &__profile {
     display: flex;
     flex-direction: column;
     align-items: center;
-    &__avatar {
-      color: lightgray;
-      font-size: 4em;
+    // border-bottom: 1px solid v.$color-avatar;
+    padding-bottom: 0.5em;
+    margin: 0 1em 0 1em;
+
+    // background-color: lightcoral;
+    &__user {
+      font-weight: 400;
     }
+    &__file {
+      // background-color: lightcyan;
+      border-radius: 50%;
+      width: 2.8em;
+      height: 2.8em;
+      border: 3px solid white;
+      box-shadow: 2px 3px 3px v.$box-shadow;
+      object-fit: cover;
+    }
+    &__file:hover {
+      transform: translateY(-3px);
+    }
+    &__avatar {
+      // background-color: lightgreen;
+      color: v.$color-avatar;
+      font-size: 2.8em;
+      border-radius: 50%;
+    }
+    &__avatar:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  // &__avatar:hover {
+  //   color: v.$color-avatar-hover;
+  // }
+
+  &--close {
+    transform: translateX(-11em);
+    border: inherit;
   }
 
   &__profileUser {
-    color: lightgray;
+    color: v.$color-btn;
     display: flex;
     flex-direction: column;
     align-items: center;
-
     &__single {
-      padding-top: 0.5em;
-      font-size: 2em;
-    }
-    &__single:hover {
-      color: grey;
+      color: v.$color-avatar-other;
+      padding-top: 0.8em;
+      font-size: 1em;
+      &__user {
+        color: v.$color-btn-auth;
+        font-weight: 400;
+        text-align: center;
+      }
+      &__file {
+        // background-color: lightcyan;
+        border-radius: 50%;
+        width: 2.2em;
+        height: 2.2em;
+        border: 3px solid white;
+        box-shadow: 2px 3px 3px v.$box-shadow;
+        object-fit: cover;
+      }
+      &__toggle {
+        text-align: center;
+      }
+      &__avatar {
+        color: v.$color-avatar;
+        font-size: 2.2em;
+        border-radius: 50%;
+      }
+      &__avatar:hover {
+        transform: translateY(-3px);
+        color: v.$light-color;
+      }
+      &__file {
+        border-radius: 50%;
+        width: 2.2em;
+        border: 2px solid white;
+        box-shadow: 2px 3px 3px v.$box-shadow;
+      }
+      &__file:hover {
+        transform: translateY(-3px);
+      }
     }
   }
   &__footer {
-    border-top: 1px solid lightgray;
+    border-top: 1px solid v.$color-avatar;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 1.5em 1em 0 1em;
     padding-top: 0.5em;
     transition: transform 0.4s ease;
+    color: v.$color-avatar;
 
     &--close {
       transform: translateX(-11em);
       border: inherit;
     }
+  }
+  &__footer:hover {
+    color: v.$color-btn-auth;
   }
 }

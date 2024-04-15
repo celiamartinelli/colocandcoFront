@@ -1,0 +1,41 @@
+@use '@scssVariables' as v;
+
+.headerPhone {
+  display: flex;
+  flex-direction: row;
+  color: v.$color-btn;
+  justify-content: space-between;
+  // background-color: lightcoral;
+  margin: 0 1em;
+  padding-top: 1em;
+
+  &__logo {
+    text-align: center;
+    font-size: 1.3em;
+
+    color: v.$color-btn;
+  }
+  &__user {
+    //background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // padding-right: 0.5em;
+
+    &__home {
+      color: v.$color-avatar;
+      font-size: 2.5em;
+      // border-radius: 50%;
+    }
+    &__avatar:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  &__logout {
+    padding-left: 0.5em;
+    position: relative;
+    cursor: pointer;
+    font-size: 1.5em;
+  }
+}

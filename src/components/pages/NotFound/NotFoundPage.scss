@@ -1,1 +1,9 @@
 @use '@scssVariables' as v;
+
+.container__content__404 {
+  width: 80%;
+  margin: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+}

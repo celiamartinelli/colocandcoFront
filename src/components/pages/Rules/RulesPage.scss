@@ -1,1 +1,68 @@
 @use '@scssVariables' as v;
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  &__R {
+    // background-color: lightcoral;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    &__button {
+      margin: 1em auto;
+      width: 7em;
+      font-size: small;
+      background-color: v.$color-btn;
+      border-radius: 6px;
+      // margin-top: 1em;
+      padding: 0.5em;
+      color: v.$light-color;
+      border-bottom: 3px solid v.$color-text-auth;
+      // text-shadow: 0px -2px #2980b9;
+      // -webkit-transition: all 0.1s;
+      transition: all 0.1s;
+
+      &__icone {
+        padding-left: 0.2em;
+      }
+    }
+    &__button:hover {
+      background-color: v.$color-btn-hover;
+      color: v.$color-text-auth-hover;
+    }
+    &__button:active {
+      -webkit-transform: translate(0px, 5px);
+      transform: translate(0px, 5px);
+      border-bottom: 1px solid;
+    }
+    &__main {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2em 4em 4em 4em;
+      margin: auto;
+      &__form {
+        width: 100%;
+        // height: 100vh;
+        &__rules {
+          width: 100%;
+          &__button {
+            background-color: v.$color-btn;
+            width: 6em;
+            padding: 0.5em;
+            border-radius: 4px;
+            color: v.$light-color;
+            margin: 1em auto;
+            text-align: center;
+          }
+          &__button:hover {
+            background-color: v.$color-btn-hover;
+          }
+        }
+      }
+    }
+  }
+}

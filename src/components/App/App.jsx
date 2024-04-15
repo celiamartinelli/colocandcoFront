@@ -1,9 +1,8 @@
 import './App.scss';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { handleSuccessfullLogin } from '../../store/userSlice';
-// import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { persistValuesState } from '../../store/userSlice';
 import WelcomePage from '../pages/authentication/Welcome/WelcomePage';
 import LoginPage from '../pages/authentication/Login/LoginPage';
 import SignUpPage from '../pages/authentication/SignUp/SignUpPage';
@@ -22,63 +21,98 @@ import TaskPage from '../pages/Task/TaskPage';
 import SettingPage from '../pages/Setting/SettingPage';
 import FaqPage from '../pages/Faq/FaqPage';
 import NotFoundPage from '../pages/NotFound/NotFoundPage';
+import ProfileUserPage from '../pages/ProfileUser/ProfileUserPage';
 
 function App() {
   const dispatch = useDispatch();
   const logged = useSelector((state) => state.user.logged);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
-  // Check if there is a token in the local storage
-  // This useEffect runs when the component is first shown or when 'dispatch' changes
+  const userData = useSelector((state) => state.user.userData);
+  // console.log('userId', userData);
+  const users = useSelector((state) => state.user.users);
+  const colocs = users.filter((user) => user.id !== userData.userId);
+
   useEffect(() => {
     const token = localStorage.getItem('token');
-    // Dispatch the successful login action with the token
+    const user = JSON.parse(localStorage.getItem('user'));
+    const settingInfo = JSON.parse(localStorage.getItem('settingInfo'));
+    // console.log('settingUser dans app', settingInfo);
+    // Check if there is a token in the local storage
+    // This useEffect runs when the component is first shown or when 'dispatch' changes
     if (token) {
-      // If a token exists, mark the user as logged in by updating 'logged' to true
-      dispatch(handleSuccessfullLogin({ logged: true, token }));
+      dispatch(persistValuesState({ token, user, logged: true, settingInfo }));
     }
-    // - Conditional rendering based on the 'logged' state
-    // - If not logged in, navigate to the login page
-    // - If logged in, render the HomePage component
-    if (!logged) {
-      navigate('/login');
+    // Set loading to false once the initial processing is done
+    setLoading(false);
+  }, [dispatch]);
+
+  // useEffect to display /create-profile page if is the first connection
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user && !user.firstname && !user.birthdate) {
+      // Redirects to the profile creation page
+      navigate('/create-profile');
     }
-    // The useEffect updates the state whenever there is a change in 'dispatch', 'logged', or 'navigate'.
-    // add navigate due to eslint
-  }, [dispatch, logged, navigate]);
+  }, [navigate]);
+
+  // If still loading, you can show a loading spinner or any other indicator
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <Routes>
-      {/* Routes accessible to all users, whether logged in or not */}
-      <Route path="/welcome" element={<WelcomePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/signup-coloc" element={<SignUpColocPage />} />
-      {/*  !created ? {<SignUpColocPage />} : <Navigate to="/create-profil" / > */}
-      <Route path="/join-coloc" element={<SignJoinColocPage />} />
-      <Route path="/create-profile" element={<CreateProfilePage />} />
-      <Route path="/" element={<HomePage />} />
+    <div className={`backgroundApp ${!logged ? 'backgroungAuth' : ''}`}>
+      <Routes>
+        {/* Routes accessible to all users, whether logged in or not */}
+        <Route path="/welcome" element={<WelcomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signup-coloc" element={<SignUpColocPage />} />
+        {/*  !created ? {<SignUpColocPage />} : <Navigate to="/login" / > */}
+        <Route path="/join-coloc" element={<SignJoinColocPage />} />
+        <Route path="/create-profile" element={<CreateProfilePage />} />
 
-      {/* Protected routes requiring login */}
-      {!logged ? '' : <Route path="/profile" element={<ProfilePage />} />}
-      {!logged ? '' : <Route path="/profile/:user" element={<ProfilePage />} />}
-      {!logged ? '' : <Route path="/rules" element={<RulesPage />} />}
-      {!logged ? '' : <Route path="/events" element={<CalendarPage />} />}
-      {!logged ? '' : <Route path="/messaging" element={<MessagePage />} />}
-      {!logged ? '' : <Route path="/vote" element={<VotePage />} />}
-      {!logged ? '' : <Route path="/expenses" element={<ExpensesPage />} />}
-      {!logged ? '' : <Route path="/tasks" element={<TaskPage />} />}
-      {!logged ? '' : <Route path="/settings" element={<SettingPage />} />}
-      {!logged ? '' : <Route path="/faq" element={<FaqPage />} />}
-      {!logged ? (
-        ''
-      ) : (
-        <Route path="/shopping-list" element={<ShoppingPage />} />
-      )}
+        {/* Protected routes requiring login */}
+        {logged ? (
+          <>
+            {' '}
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/:colocId" element={<ProfileUserPage />} />
+            <Route path="/rules" element={<RulesPage />} />
+            <Route path="/events" element={<CalendarPage />} />
+            <Route path="/messaging" element={<MessagePage />} />
+            <Route path="/vote" element={<VotePage />} />
+            <Route path="/expenses" element={<ExpensesPage />} />
+            <Route path="/tasks" element={<TaskPage />} />
+            <Route path="/settings" element={<SettingPage />} />
+            <Route path="/faq" element={<FaqPage />} />
+            <Route path="/shopping-list" element={<ShoppingPage />} />
+            <Route path="/" element={<HomePage />} />
+          </>
+        ) : (
+          <>
+            <Route path="/profile" element={<Navigate to="/login" />} />
+            <Route path="/profile/:userId" element={<Navigate to="/login" />} />
+            <Route path="/rules" element={<Navigate to="/login" />} />
+            <Route path="/events" element={<Navigate to="/login" />} />
+            <Route path="/messaging" element={<Navigate to="/login" />} />
+            <Route path="/vote" element={<Navigate to="/login" />} />
+            <Route path="/expenses" element={<Navigate to="/login" />} />
+            <Route path="/tasks" element={<Navigate to="/login" />} />
+            <Route path="/settings" element={<Navigate to="/login" />} />
+            <Route path="/faq" element={<Navigate to="/login" />} />
+            <Route path="/shopping-list" element={<Navigate to="/login" />} />
+            <Route path="/" element={<Navigate to="/login" />} />
+          </>
+        )}
 
-      {/*  {logged ? <Route path="/" element={<HomePage />} /> : navigate('/login')} */}
-      {/* Redirect to the NotFoundPage if the route is not found */}
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+        {/* Redirect to the NotFoundPage if the route is not found */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </div>
   );
 }
 

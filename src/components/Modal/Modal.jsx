@@ -1,5 +1,7 @@
 import './Modal.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { faRectangleXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Modal() {
   const [modal, setModal] = useState(true);
@@ -9,12 +11,12 @@ export default function Modal() {
   };
 
   return (
-    <div>
+    <div className="containerModal">
       {modal && (
-        <div className="modal">
+        <div className="containerModal__modal">
           <div
             onClick={toggleModal}
-            className="modal__overlay"
+            className="containerModal__modal__overlay"
             // Add role="button" to indicate that this element serves as a button for accessibility
             role="button"
             // Set tabIndex={0} to make the overlay focusable when navigating using the keyboard
@@ -26,15 +28,16 @@ export default function Modal() {
           >
             {' '}
           </div>
-          <div className="modal__content">
+          <div className="containerModal__modal__content">
             <h2>Votre inscription est bien validée</h2>
             <p>Vous pouvez désormais vous connecter</p>
             <button
               type="button"
-              className="modal__close"
+              className="containerModal__modal__content__close"
               onClick={toggleModal}
+              aria-label="Fermer la fenêtre modale"
             >
-              X
+              <FontAwesomeIcon icon={faRectangleXmark} />
             </button>
           </div>
         </div>

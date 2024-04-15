@@ -1,15 +1,7 @@
 @use '@scssVariables' as v;
 
-.modal {
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
-
-  &__overlay {
+.containerModal {
+  &__modal {
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -17,30 +9,104 @@
     right: 0;
     bottom: 0;
     position: fixed;
-    background: rgba(49, 49, 49, 0.8);
-  }
-  &__content {
-    font-size: 1.5rem;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    line-height: 1.4;
-    background: #f1f1f1;
-    padding: 14px 28px;
-    border-radius: 3px;
-    max-width: 600px;
-    min-width: 300px;
-    margin: 50px;
-  }
 
-  &__close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 7px;
-    border: solid grey 1px;
-    color: red;
-    cursor: pointer;
+    &__overlay {
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: fixed;
+      background: rgba(49, 49, 49, 0.8);
+    }
+    &__content {
+      font-size: 1.2rem;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      line-height: 1.4;
+      // height: 100vh;
+      background: -webkit-linear-gradient(
+        306deg,
+        #0a226b,
+        #0a67ae,
+        #f0f0f0
+      ); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(
+        306deg,
+        #0a226b,
+        #0a67ae,
+        #f0f0f0
+      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      padding: 14px 28px;
+      border-radius: 3px;
+      max-width: 600px;
+      min-width: 300px;
+      //margin: 50px;
+      &__close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 5px 7px;
+        cursor: pointer;
+      }
+    }
   }
 }
+
+// .modal {
+//   width: 100vw;
+//   height: 100vh;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   position: fixed;
+
+//   &__overlay {
+//     width: 100vw;
+//     height: 100vh;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     position: fixed;
+//     background: rgba(49, 49, 49, 0.8);
+//   }
+//   &__content {
+//     font-size: 1.2rem;
+//     position: absolute;
+//     top: 40%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     line-height: 1.4;
+//     // height: 100vh;
+//     background: -webkit-linear-gradient(
+//       306deg,
+//       #0a226b,
+//       #0a67ae,
+//       #f0f0f0
+//     ); /* Chrome 10-25, Safari 5.1-6 */
+//     background: linear-gradient(
+//       306deg,
+//       #0a226b,
+//       #0a67ae,
+//       #f0f0f0
+//     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//     padding: 14px 28px;
+//     border-radius: 3px;
+//     max-width: 600px;
+//     min-width: 300px;
+//     margin: 50px;
+//   }
+
+//   &__close {
+//     position: absolute;
+//     top: 10px;
+//     right: 10px;
+//     padding: 5px 7px;
+//     cursor: pointer;
+//   }
+// }

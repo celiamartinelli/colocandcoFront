@@ -1,12 +1,19 @@
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import HeaderSign from '../../../HeaderSign/HeaderSign';
 import HeaderSignTitle from '../../../HeaderSignTitle/HeaderSignTitle';
 import './SignUpPage.scss';
 
 export default function SignUpPage() {
   return (
-    <>
-      <HeaderSign />
+    <div>
+      <div className="headerSign">
+        <NavLink to="/welcome">
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </NavLink>
+        <HeaderSign />
+      </div>
       <div className="containerSign">
         <HeaderSignTitle />
         <div className="containerSign__main">
@@ -25,15 +32,13 @@ export default function SignUpPage() {
               >
                 Rejoindre une Colocation
               </NavLink>
+              <NavLink to="/login" className="containerSign__main__main__link">
+                Vous possédez déjà un compte Coloc&Co? Cliquez-ici!
+              </NavLink>
             </div>
           </div>
         </div>
-        <div className="containerSign__footer">
-          <NavLink to="/login" className="containerSign__footer__link">
-            Vous possédez déjà un compte Coloc&Co? Cliquez-ici!
-          </NavLink>
-        </div>
       </div>
-    </>
+    </div>
   );
 }

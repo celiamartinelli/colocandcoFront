@@ -1,26 +1,40 @@
 @use '@scssVariables' as v;
 
+.headerSign {
+  color: v.$light-color;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  // justify-content: space-between;
+  align-items: center;
+  padding: 1em 1em 1em;
+  justify-content: flex-end;
+}
+
 .containerSign {
-  //background-color: lightcoral;
-  height: 85vh;
-  width: 70%;
+  //  height: 50vh;
+  // width: 40%;
   margin: auto;
   text-align: center;
-  border: 1px lightgray solid;
-  border-radius: 4px;
-  box-shadow: 2px 3px 6px lightgray;
-  padding: 2em 0 2em 0;
+  padding: 0 0 2em 0;
+  color: v.$light-color;
   &__main {
     //background-color: lightgreen;
-    height: 50vh;
-    width: 50%;
+    background-color: rgba(15, 61, 117, 0.3);
+    box-shadow: 2px 3px 6px v.$box-shadow;
+    border-radius: 6px;
+    // border: 1px v.$box-shadow solid;
+    //height: 40vh;
+    width: 40%;
     margin: auto;
-    padding: 3em 0 1em 0;
+    // padding: 3em 0 1em 0;
     &__header {
       padding: 1em 0 1em 0;
+      margin-top: 2em;
     }
     &__title {
-      padding: 1em 0 1em 0;
+      font-weight: 400;
+      padding: 1em 0 0 0;
     }
     &__main {
       //background-color: lightsalmon;
@@ -28,21 +42,35 @@
       flex-direction: column;
 
       &__button {
-        background-color: v.$color-btn;
+        width: 50%;
+        margin: auto;
+        background-color: v.$color-btn-auth;
         margin-top: 1em;
         padding: 0.5em;
-        border-radius: 4px;
-        color: v.$light-color;
+        border-radius: 6px;
+        color: v.$color-text-auth;
+        border-bottom: 3px solid v.$color-text-auth;
+        // text-shadow: 0px -2px #2980b9;
+        // -webkit-transition: all 0.1s;
+        transition: all 0.1s;
       }
       &__button:hover {
-        background-color: v.$color-btn-hover;
+        background-color: v.$color-btn-auth-hover;
+        color: v.$color-text-auth-hover;
+      }
+      &__button:active {
+        -webkit-transform: translate(0px, 5px);
+        transform: translate(0px, 5px);
+        border-bottom: 1px solid;
+      }
+      &__link {
+        font-size: small;
+        margin-top: 1em;
+        color: v.$color-avatar;
+      }
+      &__link:hover {
+        color: v.$color-btn-auth;
       }
     }
-  }
-  &__footer {
-    margin-top: 2em;
-  }
-  &__footer:hover {
-    color: v.$color-btn;
   }
 }

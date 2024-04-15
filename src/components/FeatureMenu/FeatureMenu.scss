@@ -1,12 +1,25 @@
 @use '@scssVariables' as v;
 
 .Menu {
-  border-right: 1px solid lightgray;
+  //position: fixed;
+  // top: 0;
+  border-right: 1px solid v.$color-avatar;
   width: 13em;
   height: 100vh;
   position: relative;
-  z-index: 10;
+  //z-index: 10;
   transition: transform 0.4s ease;
+  background: -webkit-linear-gradient(
+    0deg,
+    #0a226b,
+    #0a67ae
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    0deg,
+    #0a226b,
+    #0a67ae
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: v.$light-color;
 
   &--close {
     transform: translateX(-11em);
@@ -24,9 +37,27 @@
     flex-direction: column;
     align-items: center;
 
+    &__user {
+      font-weight: 400;
+    }
+    &__file {
+      border-radius: 50%;
+      width: 2.8em;
+      height: 2.8em;
+      border: 3px solid white;
+      box-shadow: 2px 2px 3px rgba(50, 48, 59, 0.5);
+      object-fit: cover;
+    }
+    &__file:hover {
+      transform: translateY(-3px);
+    }
     &__avatar {
-      color: lightgray;
-      font-size: 4em;
+      color: v.$color-avatar;
+      font-size: 2.8em;
+      border-radius: 50%;
+    }
+    &__avatar:hover {
+      transform: translateY(-3px);
     }
     &--off {
       transition: opacity 0.3s ease;
@@ -35,6 +66,10 @@
       transition: opacity 0.3s ease;
     }
   }
+  &--close {
+    transform: translateX(-11em);
+    border: inherit;
+  }
 
   &__feature {
     color: grey;
@@ -42,13 +77,15 @@
     flex-direction: column;
     align-items: center;
     padding-top: 1em;
+
     &__single {
       padding: 1.2em 0.2em 1em 0.2em;
       font-size: 1.1em;
-      border-top: 1px solid lightgray;
+      border-top: 1px solid v.$color-avatar;
+      color: v.$color-avatar-other;
     }
     &__single:hover {
-      color: black;
+      color: v.$color-btn-auth;
     }
   }
 }

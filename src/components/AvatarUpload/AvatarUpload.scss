@@ -1,0 +1,84 @@
+@use '@scssVariables' as v;
+
+.containerAvatar {
+  // background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.7em;
+  color: v.$color-inset-focus;
+  margin: 0.5em;
+  &__edit {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    &__button {
+      font-size: small;
+      background-color: v.$color-btn;
+      border-radius: 50px;
+      // margin-top: 1em;
+      padding: 0.2em 0.5em 0.1em;
+      color: v.$light-color;
+      border-bottom: 3px solid v.$color-text-auth;
+      // text-shadow: 0px -2px #2980b9;
+      // -webkit-transition: all 0.1s;
+      transition: all 0.1s;
+      &__icone {
+        padding-left: 0.8em;
+      }
+    }
+    &__button:hover {
+      background-color: v.$color-btn-hover;
+      color: v.$color-text-auth-hover;
+    }
+    &__button:active {
+      -webkit-transform: translate(0px, 5px);
+      transform: translate(0px, 5px);
+      border-bottom: 1px solid;
+    }
+  }
+  &__formUpload {
+    // background-color: lightcoral;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__input {
+      // background-color: lightgreen;
+      font-size: 0.5em;
+      // margin: auto;
+    }
+    &__button {
+      width: 10%;
+      // background-color: lightgray;
+      font-size: small;
+      background-color: v.$color-valid;
+      border-radius: 50px;
+      // margin-top: 1em;
+      padding: 0.1em 0.5em;
+      color: v.$light-color;
+      border-bottom: 1px solid v.$color-valid-hover;
+      // text-shadow: 0px -2px #2980b9;
+      // -webkit-transition: all 0.1s;
+      transition: all 0.1s;
+    }
+    &__button:hover {
+      background-color: v.$color-valid-hover;
+      color: v.$color-text-auth-hover;
+    }
+    &__button:active {
+      -webkit-transform: translate(0px, 3px);
+      transform: translate(0px, 3px);
+      border-bottom: 1px solid;
+    }
+  }
+  &__button:hover {
+    background-color: v.$color-valid-hover;
+    color: v.$color-text-auth-hover;
+  }
+  &__button:active {
+    -webkit-transform: translate(0px, 5px);
+    transform: translate(0px, 5px);
+    border-bottom: 1px solid;
+  }
+}

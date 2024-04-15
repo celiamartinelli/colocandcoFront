@@ -2,8 +2,8 @@ import './HeaderSign.scss';
 
 export default function HeaderSign() {
   return (
-    <div className="headerSign">
-      <p className="headerSign__logo">Coloc&co</p>
+    <div className="headerLogo">
+      <p className="headerLogo">Coloc&co</p>
     </div>
   );
 }
