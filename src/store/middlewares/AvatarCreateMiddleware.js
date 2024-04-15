@@ -1,5 +1,5 @@
 // Avatar
-import { uploadAvatar } from '../userSlice';
+import { reloadAvatar, uploadAvatar } from '../userSlice';
 
 const AvatarCreateMiddleware = (store) => (next) => (action) => {
   if (action.type === 'UPLOAD_AVATAR') {
@@ -36,6 +36,7 @@ const AvatarCreateMiddleware = (store) => (next) => (action) => {
         console.log('data create avatar', avatar);
         store.dispatch(uploadAvatar(avatar));
         store.dispatch({ type: 'UPLOAD_AVATAR_SUCCESS', payload: avatar });
+        store.dispatch(reloadAvatar());
       })
       .catch((error) => {
         console.error("Erreur lors du téléchargement de l'avatar:", error);

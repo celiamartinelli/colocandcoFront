@@ -16,13 +16,12 @@ export default function RulesPage() {
   const [showRulesContent, setShowRulesContent] = useState([]);
 
   const isMobile = useMediaQuery({ query: '(min-width: 500px)' });
-
+  const content = useSelector((state) => state.feature.content);
   // Show rules content
   useEffect(() => {
     dispatch({ type: 'GET_RULES_CONTENT' });
   }, []);
 
-  const content = useSelector((state) => state.feature.content);
   // show rules content modification
   useEffect(() => {
     if (content[0]?.content) {

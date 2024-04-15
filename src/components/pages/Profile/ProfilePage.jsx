@@ -42,18 +42,20 @@ export default function ProfilePage() {
   // stocker l'url de l'image
   const [previewUrl, setPreviewUrl] = useState('');
 
+  const userData = useSelector((state) => state.user.userData);
+  console.log('userData', userData);
+
   const formatDate = (date) => {
     if (!date) return ''; // Ajoutez cette vérification pour éviter les dates indéfinies
     return format(parseISO(date), 'dd/MM/yyyy');
   };
 
+  const refreshAvatar = useSelector((state) => state.user.refresh_avatar);
+
   useEffect(() => {
     // Get user informations when loading the component
     dispatch({ type: 'GET_USER_INFORMATIONS' });
-  }, [dispatch]);
-
-  const userData = useSelector((state) => state.user.userData);
-  console.log('userData', userData.avatar_file);
+  }, [dispatch, refreshAvatar]);
 
   // faire apparaitre les données après modification
   useEffect(() => {

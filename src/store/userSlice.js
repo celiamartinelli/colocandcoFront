@@ -5,6 +5,7 @@ const initialState = {
   userData: [],
   settingUser: {},
   users: [],
+  refresh_avatar: false,
 
   loading: false,
   error: null,
@@ -308,6 +309,13 @@ const userSlice = createSlice({
         users: action.payload,
       };
     },
+
+    reloadAvatar: (state) => {
+      return {
+        ...state,
+        refresh_avatar: !state.refresh_avatar,
+      };
+    },
   },
 });
 
@@ -347,4 +355,5 @@ export const {
   uploadAvatarSuccess,
   uploadAvatarFailure,
   logoutAfterDelete,
+  reloadAvatar,
 } = userSlice.actions;
