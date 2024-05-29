@@ -106,10 +106,3 @@ Les contributions sont les bienvenues ! Si vous avez des idées pour améliorer 
    git push origin feature/ma-nouvelle-feature
    ```
 5. Ouvrez une pull request.
-
-## Captures d'écran
-
-Ajoutez ici des captures d'écran de votre application pour montrer à quoi elle ressemble.
-
-![Capture d'écran 1](path/to/screenshot1.png)
-![Capture d'écran 2](path/to/screenshot2.png)
